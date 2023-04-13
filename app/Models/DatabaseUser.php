@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class DatabaseUser extends Model
 {
     use HasFactory;
-    protected $fillable = 'database_users';
+    protected $table = 'database_users';
     protected $guarded = [''];
 }

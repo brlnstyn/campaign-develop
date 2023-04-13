@@ -328,6 +328,10 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Menu separator-->
 									<!--begin::Menu item-->
 									<div class="menu-item px-5">
+										<a href="{{ route('campaign.index') }}"
+											class="menu-link px-5">Profile</a>
+									</div>
+									<div class="menu-item px-5">
 										<a href="{{ url('logout') }}"
 											class="menu-link px-5">Sign Out</a>
 									</div>

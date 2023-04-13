@@ -6,25 +6,6 @@
 <div class="d-flex flex-wrap flex-stack mb-6">
     <!--begin::Title-->
     <h3 class="fw-bold my-2">Overview
-    <span class="fs-6 text-gray-400 fw-semibold ms-1">30 Days</span></h3>
-    <!--end::Title-->
-    <!--begin::Controls-->
-    <div class="d-flex align-items-center my-2">
-        <!--begin::Select wrapper-->
-        <div class="w-100px me-5">
-            <!--begin::Select-->
-            <select name="status" data-control="select2" data-hide-search="true" class="form-select form-select-sm bg-body border-body">
-                <option value="1" selected="selected">30 Days</option>
-                <option value="2">90 Days</option>
-                <option value="3">6 Months</option>
-                <option value="4">1 Year</option>
-            </select>
-            <!--end::Select-->
-        </div>
-        <!--end::Select wrapper-->
-        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Add Campaign</button>
-    </div>
-    <!--end::Controls-->
 </div>
 <!--end::Toolbar-->
 <!--begin::Row-->

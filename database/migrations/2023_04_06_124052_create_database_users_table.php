@@ -24,7 +24,7 @@ class CreateDatabaseUsersTable extends Migration
             $table->string('ward');
             $table->string('address');
             $table->string('phone');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('gender');
             $table->string('age');
             $table->string('marital_status');

@@ -5,8 +5,7 @@
 <!--begin::Toolbar-->
 <div class="d-flex flex-wrap flex-stack mb-6">
     <!--begin::Title-->
-    <h3 class="fw-bold my-2">History
-        <span class="fs-6 text-gray-400 fw-semibold ms-1">30 Days</span></h3>
+    <h3 class="fw-bold my-2">History Campaign
     <!--end::Title-->
 </div>
 <!--end::Toolbar-->
@@ -17,14 +16,6 @@
         <!--begin::Card-->
         <!--begin::Tables Widget 10-->
         <div class="card mb-5 mb-xl-12">
-            <!--begin::Header-->
-            <div class="card-header border-0 pt-5">
-                <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bold fs-3 mb-1">History Campaign</span>
-                    {{-- <span class="text-muted mt-1 fw-semibold fs-7">Over 500 new products</span> --}}
-                </h3>
-            </div>
-            <!--end::Header-->
             <!--begin::Body-->
             <div class="card-body pt-3">
                 <!--begin::Table container-->

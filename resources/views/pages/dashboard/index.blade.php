@@ -131,7 +131,7 @@
                                         </tr>
                                         @empty
                                         <tr>
-                                            <td>Tidak Ada Data</td>
+                                            <td colspan="10" class="text-center">Tidak Ada Data</td>
                                         </tr>
                                         @endforelse
                                     </table>

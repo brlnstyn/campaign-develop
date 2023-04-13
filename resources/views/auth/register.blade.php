@@ -112,7 +112,7 @@ License: For each use you must have a valid license purchased only from above li
                         <!--begin::Form-->
                         <form class="form w-100" action="{{ route('register') }}" method="POST">
                             @csrf
-                            <!--begin::Heading-->eb
+                            <!--begin::Heading-->
                             <div class="text-center mb-11">
                                 <!--begin::Title-->
                                 <h1 class="text-dark fw-bolder mb-3">Sign Up</h1>

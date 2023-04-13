@@ -43,14 +43,9 @@ Route::group(['middleware' =>['auth']],  function () {
 
     Route::get('campaign/create-step-four', [CampaignController::class, 'createStepfour'])->name('campaign.create.step.four');
     Route::post('campaign/create-step-four', [CampaignController::class, 'postCreateStepfour'])->name('campaign.create.step.four.post');
+    Route::post('import-file', [DatabaseController::class, 'import'])->name('import');
+    Route::get('campaign/campaign', [CampaignController::class, 'campaign'])->name('campaign.campaign');
+    Route::get('campaign/history', [CampaignController::class, 'history'])->name('campaign.history');
+    Route::get('campaign/overview', [CampaignController::class, 'overview'])->name('campaign.overview');
 });
 
-Route::post('import-file', [DatabaseController::class, 'import'])->name('import');
-Route::get('campaign/project', [CampaignController::class, 'campaign'])->name('campaign.project');
-// Route::get('campaign/overview', [CampaignController::class, 'overview'])->name('overview');
-
-
-
-Route::get('/campaign.overview', function () {
-    return view('pages.campaign.overview');
-});

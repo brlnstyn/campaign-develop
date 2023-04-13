@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\DatabaseUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Imports\DatabaseUsersImport;
@@ -13,7 +13,7 @@ class DatabaseController extends Controller
 {
     public function index()
     {
-        $data =User::all();
+        $data =DatabaseUser::all();
         return view('pages.database.index',[
             'data'   =>$data
         ]);

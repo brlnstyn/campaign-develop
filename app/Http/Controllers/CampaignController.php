@@ -117,7 +117,7 @@ class CampaignController extends Controller
         $request->session()->forget('campaign');
         // dd($request);
         Alert::success('Congratulation', 'Campaign Created Successfully');
-        return redirect()->route('campaign.index');
+        return redirect()->route('campaign.overview');
     }
 
     public function show()
@@ -132,8 +132,6 @@ class CampaignController extends Controller
     }
     public function campaign()
     {
-        return ['ping'];
-
         return view('pages.campaign.project');
 
     }

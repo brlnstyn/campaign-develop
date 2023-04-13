@@ -34,12 +34,6 @@
                         <!--end::Breadcrumb-->
                     </div>
                     <!--end::Page title-->
-                    <!--begin::Actions-->
-                    <div class="d-flex align-items-center gap-2 gap-lg-3">
-                        <a href="{{ route('campaign.create.step.one') }}" class="btn btn-sm fw-bold btn-primary">New Campaign</a>
-                        <!--end::Primary button-->
-                    </div>
-                    <!--end::Actions-->
                 </div>
                 <!--end::Toolbar container-->
             </div>
@@ -214,8 +208,14 @@
                                 </li>
                                 <!--end::Nav item-->
                                 <!--begin::Nav item-->
+                                <li class="nav-item mt-2 ">
+                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('campaign/campaign') ? 'active' : '' }} " href="{{ url('campaign/campaign') }}">Campaigns</a>
+                                </li>
                                 <li class="nav-item mt-2">
-                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="{{ url('campaign/project') }}">Campaigns</a>
+                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('campaign/overview') ? 'active' : '' }}" href="{{ url('campaign/overview') }}">Overview</a>
+                                </li>
+                                <li class="nav-item mt-2">
+                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('campaign/history') ? 'active' : '' }}" href="{{ url('campaign/history') }}">History</a>
                                 </li>
                                 <!--end::Nav item-->
                                 <li class="nav-item mt-2">
