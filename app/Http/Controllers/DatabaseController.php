@@ -33,4 +33,12 @@ class DatabaseController extends Controller
         Alert::success('Congratulation', 'File Upload Successfully');
         return redirect()->back();
     }
+
+    public function destroy($id)
+    {
+        $delete = DatabaseUser::find($id);
+        $delete->delete();
+        Alert::success('Congratulation', 'Delete Successfully');
+        return redirect()->back();
+    }
 }

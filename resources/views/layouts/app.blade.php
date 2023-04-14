@@ -4540,16 +4540,16 @@ License: For each use you must have a valid license purchased only from above li
     <script>
         @if(Session::has('success'))
         toastr.options = {
-            "closeButton": false,
+            "closeButton": true,
             "debug": false,
             "newestOnTop": false,
-            "progressBar": false,
+            "progressBar": true,
             "positionClass": "toastr-top-right",
             "preventDuplicates": false,
             "onclick": null,
-            "showDuration": "300",
+            "showDuration": "400",
             "hideDuration": "1000",
-            "timeOut": "3000",
+            "timeOut": "4000",
             "extendedTimeOut": "1000",
             "showEasing": "swing",
             "hideEasing": "linear",
