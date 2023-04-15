@@ -112,12 +112,12 @@ class CampaignController extends Controller
         // dd($request);
         $campaign = $request->session()->get('campaign');
         $campaign->save();
-        // dd($campaign);
+        dd($campaign);
 
         $request->session()->forget('campaign');
         // dd($request);
         Alert::success('Congratulation', 'Campaign Created Successfully');
-        return redirect()->route('campaign.overview');
+        return redirect()->route('campaign.campaign');
     }
 
     public function show()
