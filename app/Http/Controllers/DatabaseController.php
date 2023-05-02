@@ -6,6 +6,7 @@ use App\Models\DatabaseUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Imports\DatabaseUsersImport;
+use App\Models\Campaign;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -13,20 +14,26 @@ class DatabaseController extends Controller
 {
     public function index()
     {
-        $data =DatabaseUser::all();
-        return view('pages.database.index',[
-            'data'   =>$data
+        $data = DatabaseUser::all();
+        return view('pages.database.index', [
+            'data'   => $data
         ]);
     }
 
-    public function show()
+    public function show($id)
     {
-        return view('pages.database.show');
+        $data = DatabaseUser::find($id);
+        $campaign = Campaign::all();
+        // dd($data);
+        return view('pages.database.show', [
+            'data' => $data,
+            'campaign' => $campaign
+        ]);
     }
 
     public function import(Request $request)
     {
-        $fileName =request()->file->getClientOriginalName();
+        $fileName = request()->file->getClientOriginalName();
         request()->file('file')->storeAs('DatabaseUsers', $fileName, 'public');
         // dd($fileName);
         Excel::import(new DatabaseUsersImport, $request->file);
@@ -40,5 +47,20 @@ class DatabaseController extends Controller
         $delete->delete();
         Alert::success('Congratulation', 'Delete Successfully');
         return redirect()->back();
+    }
+
+    public function updateStatus($id)
+    {
+        $user   = DatabaseUser::find($id);
+        // dd($user);
+        if ($user->status == "0") {
+            $user->update(['status' => "1"]);
+            return redirect()->route('database.index')->with('success', 'User has been blocked successfully!');
+        } elseif ($user->status == "1") {
+            $user->update(['status' => "0"]);
+            return redirect()->route('database.index')->with('success', 'User has been actived successfully!');
+        } else {
+            return redirect()->route('database.index')->with('error', 'Something went wrong!');
+        }
     }
 }

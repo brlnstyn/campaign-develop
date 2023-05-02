@@ -26,7 +26,7 @@ Route::get('form-register', [AuthController::class, 'formRegister'])->name('form
 Route::post('register', [AuthController::class, 'storeRegister'])->name('register');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::group(['middleware' =>['auth']],  function () {
+Route::group(['middleware' => ['auth']],  function () {
     Route::resource('dashboard', DashboardController::class);
     Route::resource('database', DatabaseController::class);
 
@@ -41,11 +41,13 @@ Route::group(['middleware' =>['auth']],  function () {
     Route::post('campaign/create-step-three', [CampaignController::class, 'postCreateStepthree'])->name('campaign.create.step.three.post');
 
     Route::get('campaign/create-step-four', [CampaignController::class, 'createStepfour'])->name('campaign.create.step.four');
+    Route::post('campaign/create-step-four/look-up', [CampaignController::class, 'lookUp'])->name('campaign.create.step.four.lookUp');
     Route::post('campaign/create-step-four', [CampaignController::class, 'postCreateStepfour'])->name('campaign.create.step.four.post');
 
     Route::post('import-file', [DatabaseController::class, 'import'])->name('import');
+    Route::get('database/update-status/{id}', [DatabaseController::class, 'updateStatus'])->name('database.updateStatus');
     Route::get('campaign/campaign', [CampaignController::class, 'campaign'])->name('campaign.campaign');
     Route::get('campaign/history', [CampaignController::class, 'history'])->name('campaign.history');
     Route::get('campaign/overview', [CampaignController::class, 'overview'])->name('campaign.overview');
+    Route::get('campaign/send-mail', [CampaignController::class, 'sendMail'])->name('campaign.sendMail');
 });
-
