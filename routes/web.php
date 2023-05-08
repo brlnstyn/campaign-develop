@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth']],  function () {
     Route::resource('database', DatabaseController::class);
 
     Route::get('campaign', [CampaignController::class, 'index'])->name('campaign.index');
+    Route::get('campaign/campaign/{id}', [CampaignController::class, 'show'])->name('campaign.show');
     Route::get('campaign/create-step-one', [CampaignController::class, 'createStepOne'])->name('campaign.create.step.one');
     Route::post('campaign/create-step-one', [CampaignController::class, 'postCreateStepOne'])->name('campaign.create.step.one.post');
 
@@ -49,5 +50,5 @@ Route::group(['middleware' => ['auth']],  function () {
     Route::get('campaign/campaign', [CampaignController::class, 'campaign'])->name('campaign.campaign');
     Route::get('campaign/history', [CampaignController::class, 'history'])->name('campaign.history');
     Route::get('campaign/overview', [CampaignController::class, 'overview'])->name('campaign.overview');
-    Route::get('campaign/send-mail', [CampaignController::class, 'sendMail'])->name('campaign.sendMail');
+    Route::get('campaign/create-step-four/send-mail', [CampaignController::class, 'sendMail'])->name('campaign.sendMail');
 });
