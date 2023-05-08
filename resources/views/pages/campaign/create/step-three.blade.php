@@ -97,7 +97,7 @@
                                                 {{-- <input type="text" class="form-control form-control-lg form-control-solid"
                                                 name="message" placeholder="" required value="{{ old('message') }}"/> --}}
                                                 <textarea name="message" id="message" class="form-control form-control-lg form-control-solid" cols="30"
-                                                    rows="10" required value="{{ old('message') }}"></textarea>
+                                                    rows="10" required value="{{ $campaign->message ?? '' }}"></textarea>
                                                 <!--end::Input-->
                                             </div>
                                             <div class="d-flex flex-stack pt-10">

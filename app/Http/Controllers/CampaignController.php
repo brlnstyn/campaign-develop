@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Campaign;
-use App\Models\DatabaseUser;
-use App\Models\logCampaign;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Mail\SendMail;
-use Illuminate\Support\Facades\Mail;
-use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\Campaign;
+use App\Models\logCampaign;
+use App\Models\DatabaseUser;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Spatie\Activitylog\Models\Activity;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CampaignController extends Controller
 {
@@ -86,7 +88,7 @@ class CampaignController extends Controller
         ]);
     }
 
-    public function postCreateStepfour($request)
+    public function postCreateStepfour(Request $request)
     {
         $validatedData = $request->validate([
             'setup_total_respondent' => 'required',
@@ -98,6 +100,10 @@ class CampaignController extends Controller
         $campaign = $request->session()->get('campaign');
         // dd($campaign);
         $campaign->save();
+
+        activity()
+            ->causedBy(Auth::user())
+            ->log($campaign->campaign_name);
         $request->session()->forget('campaign');
         // dd($request);
         Alert::success('Congratulation', 'Campaign Created Successfully');
@@ -195,9 +201,13 @@ class CampaignController extends Controller
             'campaign' => $campaign
         ]);
     }
-    public function history()
+    public function history(Request $request)
     {
-        return view('pages.campaign.history');
+        $log =Activity::latest()->get();
+
+        return view('pages.campaign.history',[
+            'log'  =>$log
+        ]);
     }
 
     public function sendMail($lookUp)
