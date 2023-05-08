@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Campaign;
 use App\Models\DatabaseUser;
+use App\Models\logCampaign;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\SendMail;
@@ -21,7 +22,7 @@ class CampaignController extends Controller
     public function createStepOne(Request $request)
     {
         $campaign = $request->session()->get('campaign');
-
+        // dd($campaign);
         return view('pages.campaign.create.step-one', compact('campaign'));
     }
 
@@ -85,33 +86,42 @@ class CampaignController extends Controller
         ]);
     }
 
-    public function postCreateStepfour(Request $request)
+    public function postCreateStepfour($request)
     {
-        // dd($request);
         $validatedData = $request->validate([
             'setup_total_respondent' => 'required',
         ]);
         // dd($validatedData);
         $campaign = $request->session()->get('campaign');
         $campaign->fill($validatedData);
-        // $request->session()->put('campaign', $campaign);
         // dd($request);
         $campaign = $request->session()->get('campaign');
-        $campaign->save();
         // dd($campaign);
-
+        $campaign->save();
         $request->session()->forget('campaign');
         // dd($request);
         Alert::success('Congratulation', 'Campaign Created Successfully');
         return redirect()->route('campaign.campaign');
     }
 
-    public function lookUp(Request $request)
+    public function logCampaign($request, $lookUp)
+    {
+        $campaign = $request->session()->get('campaign');
+        logCampaign::create([
+            'campaign_id' => $campaign->id,
+            'database_user_id' => $lookUp->id,
+            'phone' => $lookUp->phone,
+            'email' => $lookUp->email,
+            'status' => 0
+        ]);
+        return redirect()->route('campaign.campaign');
+    }
+
+    public function lookUp(request $request)
     {
         $campaign = $request->session()->get('campaign');
         // dd($campaign);
         $user = DatabaseUser::all()->count();
-        // dd($user);
         $lookUp = DB::table('database_users')
             ->orWhere('province', 'like', "%" . $campaign->setup_domicile . "%")
             ->orWhere('age', 'like', "%" . $campaign->setup_age_start . "%")
@@ -119,10 +129,19 @@ class CampaignController extends Controller
             ->orWhere('occupation', 'like', "%" . $campaign->setup_profession . "%")
             ->orWhere('marital_status', 'like', "%" . $campaign->setup_martial_status . "%")
             ->get();
+        // dd($lookUp->save());
+        // dd($lookUp->toArray());
+        $data = $lookUp->toArray();
+        // dd($data[0]);
+        logCampaign::create([
+            'database_user_id' => array_column($data, 'id'),
+            'phone' => array_column($data, 'phone'),
+            'email' => array_column($data, 'email'),
+        ]);
         // dd($lookUp);
-        $this->sendMail($lookUp);
         $request->session()->put('campaign', $campaign);
-        // dd($lookUp);
+        $this->sendMail($lookUp);
+        // $this->logCampaign($request, $lookUp);
         return view('pages.campaign.create.step-four', [
             'lookUp' => $lookUp,
             'user' => $user,
@@ -155,8 +174,13 @@ class CampaignController extends Controller
         return redirect()->route('campaign.create.step.four');
     }
 
-    public function show()
+    public function show($id)
     {
+        $data = Campaign::find($id);
+        // dd($data);
+        return view('pages.campaign.show', [
+            'data' => $data
+        ]);
     }
 
     public function overview()
@@ -165,7 +189,7 @@ class CampaignController extends Controller
     }
     public function campaign()
     {
-        $campaign = Campaign::all();
+        $campaign = DB::table('campaigns')->orderBy('created_at', 'DESC')->get();
         // dd($campaign);
         return view('pages.campaign.project', [
             'campaign' => $campaign
@@ -173,17 +197,12 @@ class CampaignController extends Controller
     }
     public function history()
     {
-
         return view('pages.campaign.history');
     }
 
     public function sendMail($lookUp)
     {
-        // dd($lookUp->toArray());
         $data = $lookUp->toArray();
-        // $data = array($lookUp);
-        // dd($data);
-        // $data = $lookUp;
         $emails = array_column($data, 'email');
         // dd($emails);
         $name = array_column($data, 'respondent_name');
