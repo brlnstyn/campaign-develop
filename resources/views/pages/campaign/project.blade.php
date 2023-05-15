@@ -43,7 +43,7 @@
                         <!--begin::Description-->
                         <p class="text-gray-400 fw-semibold fs-5 mt-1">{{ $data->client_name }}</p>
                         <p class="text-gray-400 fw-semibold fs-5 mt-1">{{ $data->created_at }}</p>
-                        <p class="text-gray-400 fw-semibold fs-5 mt-1">23 hours 30 minutes</p>
+                        {{-- <p class="text-gray-400 fw-semibold fs-5 mt-1">23 hours 30 minutes</p> --}}
                         <!--end::Description-->
 
                     </div>

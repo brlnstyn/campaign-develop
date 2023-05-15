@@ -13,12 +13,22 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Spatie\Activitylog\Models\Activity;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\User;
 
 class CampaignController extends Controller
 {
     public function index()
     {
-        return view('pages.campaign.index');
+        $user = DB::table('users')->get();
+        foreach ($user as $value) {
+            $value;
+        }
+        $count = Campaign::all()->count();
+        // dd($campaign);
+        return view('pages.campaign.index', [
+            'value' => $value,
+            'count' => $count
+        ]);
     }
 
     public function createStepOne(Request $request)
@@ -93,33 +103,43 @@ class CampaignController extends Controller
         $validatedData = $request->validate([
             'setup_total_respondent' => 'required',
         ]);
-        // dd($validatedData);
         $campaign = $request->session()->get('campaign');
         $campaign->fill($validatedData);
-        // dd($request);
         $campaign = $request->session()->get('campaign');
-        // dd($campaign);
         $campaign->save();
 
+        $lookUp = DB::table('database_users')
+            ->orWhere('province', 'like', "%" . $campaign->setup_domicile . "%")
+            ->orWhere('age', 'like', "%" . $campaign->setup_age_start . "%")
+            ->where('gender', 'like', "%" . $campaign->setup_gender . "%")
+            ->orWhere('occupation', 'like', "%" . $campaign->setup_profession . "%")
+            ->orWhere('marital_status', 'like', "%" . $campaign->setup_martial_status . "%")
+            ->get();
+
+        $data = $lookUp->toArray();
+        $emails = array_column($data, 'email');
+        $name = array_column($data, 'respondent_name');
+        Mail::to($emails)->send(new SendMail($name));
+
+        foreach ($data as $key => $value) {
+            $id_database = $value->id;
+            $phone = $value->phone;
+            $email = $value->email;
+        }
+        $id_campaign = $campaign->id;
+        logCampaign::create([
+            'campaign_id' => $id_campaign,
+            'database_user_id' => $id_database,
+            'phone' => $phone,
+            'email' => $email,
+            'status' => "0"
+        ]);
         activity()
             ->causedBy(Auth::user())
             ->log($campaign->campaign_name);
         $request->session()->forget('campaign');
         // dd($request);
         Alert::success('Congratulation', 'Campaign Created Successfully');
-        return redirect()->route('campaign.campaign');
-    }
-
-    public function logCampaign($request, $lookUp)
-    {
-        $campaign = $request->session()->get('campaign');
-        logCampaign::create([
-            'campaign_id' => $campaign->id,
-            'database_user_id' => $lookUp->id,
-            'phone' => $lookUp->phone,
-            'email' => $lookUp->email,
-            'status' => 0
-        ]);
         return redirect()->route('campaign.campaign');
     }
 
@@ -135,19 +155,6 @@ class CampaignController extends Controller
             ->orWhere('occupation', 'like', "%" . $campaign->setup_profession . "%")
             ->orWhere('marital_status', 'like', "%" . $campaign->setup_martial_status . "%")
             ->get();
-        // dd($lookUp->save());
-        // dd($lookUp->toArray());
-        $data = $lookUp->toArray();
-        // dd($data[0]);
-        logCampaign::create([
-            'database_user_id' => array_column($data, 'id'),
-            'phone' => array_column($data, 'phone'),
-            'email' => array_column($data, 'email'),
-        ]);
-        // dd($lookUp);
-        $request->session()->put('campaign', $campaign);
-        $this->sendMail($lookUp);
-        // $this->logCampaign($request, $lookUp);
         return view('pages.campaign.create.step-four', [
             'lookUp' => $lookUp,
             'user' => $user,
@@ -191,33 +198,42 @@ class CampaignController extends Controller
 
     public function overview()
     {
-        return view('pages.campaign.overview');
+        $user = DB::table('users')->get();
+        foreach ($user as $value) {
+            $value;
+        }
+        $count = Campaign::all()->count();
+        return view('pages.campaign.overview', [
+            'value' => $value,
+            'count' => $count
+        ]);
     }
     public function campaign()
     {
         $campaign = DB::table('campaigns')->orderBy('created_at', 'DESC')->get();
-        // dd($campaign);
+        $user = DB::table('users')->get();
+        foreach ($user as $value) {
+            $value;
+        }
+        $count = Campaign::all()->count();
         return view('pages.campaign.project', [
-            'campaign' => $campaign
+            'campaign' => $campaign,
+            'value' => $value,
+            'count' => $count
         ]);
     }
     public function history(Request $request)
     {
-        $log =Activity::latest()->get();
-
-        return view('pages.campaign.history',[
-            'log'  =>$log
+        $log = Activity::latest()->get();
+        $user = DB::table('users')->get();
+        foreach ($user as $value) {
+            $value;
+        }
+        $count = Campaign::all()->count();
+        return view('pages.campaign.history', [
+            'log'  => $log,
+            'value' => $value,
+            'count' => $count
         ]);
-    }
-
-    public function sendMail($lookUp)
-    {
-        $data = $lookUp->toArray();
-        $emails = array_column($data, 'email');
-        // dd($emails);
-        $name = array_column($data, 'respondent_name');
-        // dd($name);
-        Mail::to($emails)->send(new SendMail($name));
-        return view('pages.campaign.create.step-four');
     }
 }

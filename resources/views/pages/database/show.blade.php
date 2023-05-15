@@ -83,7 +83,7 @@
                                     </div>
                                     <div class="row mb-2">
                                         <h5><i class="fa-solid fa-location-dot mx-3"></i>Domicile</h5>
-                                        <p class="mx-5">{{ $data->district }}</p>
+                                        <p class="mx-5">{{ $data->province }}</p>
                                     </div>
                                     <div class="row mb-2">
                                         <h5><i class="fa-solid fa-venus-mars mx-3"></i>Gender</h5>

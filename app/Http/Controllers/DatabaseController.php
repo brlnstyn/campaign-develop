@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Imports\DatabaseUsersImport;
 use App\Models\Campaign;
+use App\Models\logCampaign;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -24,7 +25,8 @@ class DatabaseController extends Controller
     {
         $data = DatabaseUser::find($id);
         $campaign = Campaign::all();
-        // dd($data);
+        // $logCampaign = logCampaign::find($id);
+        // dd($logCampaign);
         return view('pages.database.show', [
             'data' => $data,
             'campaign' => $campaign
@@ -35,7 +37,6 @@ class DatabaseController extends Controller
     {
         $fileName = request()->file->getClientOriginalName();
         request()->file('file')->storeAs('DatabaseUsers', $fileName, 'public');
-        // dd($fileName);
         Excel::import(new DatabaseUsersImport, $request->file);
         Alert::success('Congratulation', 'File Upload Successfully');
         return redirect()->back();

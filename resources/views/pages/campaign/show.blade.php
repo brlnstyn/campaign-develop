@@ -79,9 +79,7 @@
                                             <!--end::Name-->
                                             <!--begin::Info-->
                                             <div class="d-flex flex-wrap fw-semibold fs-5 mb-4 pe-2">
-                                                <p class="text-gray-400 fw-semibold fs-6">Instrument that assists companies
-                                                    in measuring the level of customer
-                                                    satisfaction, for a product/service</p>
+                                                <p class="text-gray-400 fw-semibold fs-6">{{ $data->message }}</p>
                                             </div>
                                             <!--end::Info-->
                                         </div>
@@ -172,7 +170,7 @@
                                         href="{{ url('campaign/campaign') }}">Campaigns</a>
                                 </li>
                                 <li class="nav-item mt-2">
-                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('campaign/overview') ? 'active' : '' }}"
+                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('campaign/overview') ? 'active' : '' }} active"
                                         href="{{ url('campaign/overview') }}">Overview</a>
                                 </li>
                                 <li class="nav-item mt-2">

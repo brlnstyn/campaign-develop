@@ -47,7 +47,7 @@
                                     class="nav-link justify-content-center text-active-gray-800 active" data-bs-toggle="tab"
                                     role="tab" href="#kt_activity_today">Today</a>
                             </li>
-                            <li class="nav-item" role="presentation">
+                            {{-- <li class="nav-item" role="presentation">
                                 <a id="kt_activity_week_tab" class="nav-link justify-content-center text-active-gray-800"
                                     data-bs-toggle="tab" role="tab" href="#kt_activity_week">Week</a>
                             </li>
@@ -59,7 +59,7 @@
                                 <a id="kt_activity_year_tab"
                                     class="nav-link justify-content-center text-active-gray-800 text-hover-gray-800"
                                     data-bs-toggle="tab" role="tab" href="#kt_activity_year">2023</a>
-                            </li>
+                            </li> --}}
                         </ul>
                         <!--end::Tab nav-->
                     </div>
@@ -78,111 +78,125 @@
                                 <!--begin::Timeline item-->
 
                                 @forelse ($log as $item)
-                                <div class="timeline-item">
+                                    <div class="timeline-item">
 
-                                    <!--begin::Timeline line-->
-                                    <div class="timeline-line w-40px"></div>
-                                    <!--end::Timeline line-->
-                                    <!--begin::Timeline icon-->
-                                    <div class="timeline-icon symbol symbol-circle symbol-40px me-4">
-                                        <div class="symbol-label bg-light">
-                                            <!--begin::Svg Icon | path: icons/duotune/communication/com003.svg-->
-                                            <span class="svg-icon svg-icon-2 svg-icon-gray-500">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="currentColor" />
-                                                    <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon-->
-                                        </div>
-                                    </div>
-                                    <!--end::Timeline icon-->
-                                    <!--begin::Timeline content-->
-                                    <div class="timeline-content mb-10 mt-n1">
-                                        <!--begin::Timeline heading-->
-                                        <div class="pe-3 mb-5">
-                                            <!--begin::Title-->
-                                            <div class="fs-5 fw-semibold mb-2">Created  {{ $item->description }}</div>
-                                            <!--end::Title-->
-                                            <!--begin::Description-->
-                                            <div class="d-flex align-items-center mt-1 fs-6">
-                                                <!--begin::Info-->
-                                                <div class="text-muted me-2 fs-7">Added {{ $item->created_at }}</div>
-                                                <!--end::Info-->
-                                                <!--begin::User-->
-                                                <div class="symbol symbol-circle symbol-25px" data-bs-toggle="tooltip" data-bs-boundary="window" data-bs-placement="top" title="Nina Nilson">
-                                                    <img src="asset/media/avatars/300-1.jpg" alt="img" />
-                                                </div>
-                                                <!--end::User-->
+                                        <!--begin::Timeline line-->
+                                        <div class="timeline-line w-40px"></div>
+                                        <!--end::Timeline line-->
+                                        <!--begin::Timeline icon-->
+                                        <div class="timeline-icon symbol symbol-circle symbol-40px me-4">
+                                            <div class="symbol-label bg-light">
+                                                <!--begin::Svg Icon | path: icons/duotune/communication/com003.svg-->
+                                                <span class="svg-icon svg-icon-2 svg-icon-gray-500">
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path opacity="0.3"
+                                                            d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z"
+                                                            fill="currentColor" />
+                                                        <path
+                                                            d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z"
+                                                            fill="currentColor" />
+                                                    </svg>
+                                                </span>
+                                                <!--end::Svg Icon-->
                                             </div>
-                                            <!--end::Description-->
                                         </div>
-                                        <!--end::Timeline heading-->
-                                        <!--begin::Timeline details-->
-                                        <div class="overflow-auto pb-5">
-
-                                            <!--begin::Record-->
-                                            <div class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-0">
+                                        <!--end::Timeline icon-->
+                                        <!--begin::Timeline content-->
+                                        <div class="timeline-content mb-10 mt-n1">
+                                            <!--begin::Timeline heading-->
+                                            <div class="pe-3 mb-5">
                                                 <!--begin::Title-->
-                                                <div href="../../demo1/dist/apps/projects/project.html" class="fs-5 text-dark text-hover-primary fw-semibold w-375px min-w-200px">Create a Campaign</div>
+                                                <div class="fs-5 fw-semibold mb-2">Created {{ $item->description }}</div>
                                                 <!--end::Title-->
-                                                <!--begin::Label-->
-                                                <div class="min-w-175px">
-                                                    <span class="badge badge-light text-muted">{{ $item->description }}</span>
-                                                </div>
-                                                <!--end::Label-->
-                                                <!--begin::Users-->
-                                                <div class="symbol-group symbol-hover flex-nowrap flex-grow-1 min-w-100px">
+                                                <!--begin::Description-->
+                                                <div class="d-flex align-items-center mt-1 fs-6">
+                                                    <!--begin::Info-->
+                                                    <div class="text-muted me-2 fs-7">Added {{ $item->created_at }}</div>
+                                                    <!--end::Info-->
                                                     <!--begin::User-->
-                                                    <div class="symbol symbol-circle symbol-25px">
+                                                    <div class="symbol symbol-circle symbol-25px" data-bs-toggle="tooltip"
+                                                        data-bs-boundary="window" data-bs-placement="top"
+                                                        title="Nina Nilson">
                                                         <img src="asset/media/avatars/300-1.jpg" alt="img" />
                                                     </div>
                                                     <!--end::User-->
-                                                    <!--begin::User-->
-                                                    <div class="symbol symbol-circle symbol-25px">
-                                                        <div class="symbol-label fs-8 fw-semibold bg-success text-inverse-primary">B</div>
-                                                    </div>
-                                                    <!--end::User-->
                                                 </div>
-                                                <!--end::Users-->
-                                                <!--begin::Progress-->
-                                                <div class="min-w-125px">
-                                                    <span class="badge badge-light-success">Completed</span>
-                                                </div>
-                                                <!--end::Action-->
+                                                <!--end::Description-->
                                             </div>
-                                            <!--end::Record-->
-                                        </div>
-                                        <!--end::Timeline details-->
-                                    </div>
-                                    <!--end::Timeline content-->
+                                            <!--end::Timeline heading-->
+                                            <!--begin::Timeline details-->
+                                            <div class="overflow-auto pb-5">
 
-                                </div>
+                                                <!--begin::Record-->
+                                                <div
+                                                    class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-0">
+                                                    <!--begin::Title-->
+                                                    <div href="../../demo1/dist/apps/projects/project.html"
+                                                        class="fs-5 text-dark text-hover-primary fw-semibold w-375px min-w-200px">
+                                                        Create a Campaign</div>
+                                                    <!--end::Title-->
+                                                    <!--begin::Label-->
+                                                    <div class="min-w-175px">
+                                                        <span
+                                                            class="badge badge-light text-muted">{{ $item->description }}</span>
+                                                    </div>
+                                                    <!--end::Label-->
+                                                    <!--begin::Users-->
+                                                    <div
+                                                        class="symbol-group symbol-hover flex-nowrap flex-grow-1 min-w-100px">
+                                                        <!--begin::User-->
+                                                        <div class="symbol symbol-circle symbol-25px">
+                                                            <img src="asset/media/avatars/300-1.jpg" alt="img" />
+                                                        </div>
+                                                        <!--end::User-->
+                                                        <!--begin::User-->
+                                                        <div class="symbol symbol-circle symbol-25px">
+                                                            <div
+                                                                class="symbol-label fs-8 fw-semibold bg-success text-inverse-primary">
+                                                                B</div>
+                                                        </div>
+                                                        <!--end::User-->
+                                                    </div>
+                                                    <!--end::Users-->
+                                                    <!--begin::Progress-->
+                                                    <div class="min-w-125px">
+                                                        {{-- <span class="badge badge-light-success">Completed</span> --}}
+                                                    </div>
+                                                    <!--end::Action-->
+                                                </div>
+                                                <!--end::Record-->
+                                            </div>
+                                            <!--end::Timeline details-->
+                                        </div>
+                                        <!--end::Timeline content-->
+
+                                    </div>
                                 @empty
-                                <div class="timeline-item">
+                                    <div class="timeline-item">
 
-                                    <!--begin::Timeline line-->
-                                    <div class="timeline-line w-40px"></div>
-                                    <!--end::Timeline line-->
-                                    <!--begin::Timeline icon-->
-                                    <div class="timeline-icon symbol symbol-circle symbol-40px me-4">
-                                    </div>
-                                    <!--end::Timeline icon-->
-                                    <!--begin::Timeline content-->
-                                    <div class="timeline-content mb-2 mt-n1">
-                                        <!--begin::Timeline heading-->
-                                        <div class="pe-3 mb-5">
-                                            <!--begin::Title-->
-                                            <div class="fs-5 fw-semibold" style="text-align: center">History Campaign Not Found  </div>
-                                            <!--end::Title-->
+                                        <!--begin::Timeline line-->
+                                        <div class="timeline-line w-40px"></div>
+                                        <!--end::Timeline line-->
+                                        <!--begin::Timeline icon-->
+                                        <div class="timeline-icon symbol symbol-circle symbol-40px me-4">
                                         </div>
-                                        <!--end::Timeline heading-->
+                                        <!--end::Timeline icon-->
+                                        <!--begin::Timeline content-->
+                                        <div class="timeline-content mb-2 mt-n1">
+                                            <!--begin::Timeline heading-->
+                                            <div class="pe-3 mb-5">
+                                                <!--begin::Title-->
+                                                <div class="fs-5 fw-semibold" style="text-align: center">History Campaign
+                                                    Not Found </div>
+                                                <!--end::Title-->
+                                            </div>
+                                            <!--end::Timeline heading-->
+
+                                        </div>
+                                        <!--end::Timeline content-->
 
                                     </div>
-                                    <!--end::Timeline content-->
-
-                                </div>
-
                                 @endforelse
                                 <!--end::Timeline item-->
                             </div>

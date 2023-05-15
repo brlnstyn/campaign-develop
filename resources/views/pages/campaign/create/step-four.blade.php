@@ -113,7 +113,6 @@
                                                             <th class="min-w-150px">Email</th>
                                                             <th class="min-w-150px">Domicile</th>
                                                             <th class="min-w-150px">Inputed Date</th>
-                                                            <th class="min-w-150px">Last Campaign</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -124,7 +123,6 @@
                                                                 <td>{{ $item->province }}</td>
                                                                 <td>{{ $item->entry_date }}
                                                                 </td>
-                                                                <td>survey tes</td>
                                                             </tr>
                                                         @endforeach
                                                     </tbody>
